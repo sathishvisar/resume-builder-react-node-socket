@@ -1,0 +1,23 @@
+
+.resume-heading-2 {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.resume-heading-3 {
+    font-weight: 600;
+    font-size: 14.66px;
+}
+
+.resume-date-time {
+    font-size: 12px;
+    color: rgb(130, 139, 162);
+}
+
+.resume-content {
+    font-size: 14px;
+}
+
+.resume-sidebar-content {
+    font-size: 13.33px;
+}
