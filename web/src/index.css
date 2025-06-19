@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/manrope/800.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/400.css';
+
+
+/* reserve 1 inch top/bottom for header/footer */
+.pdf-wrapper{
+  width:8.5in;    
+  min-height:11in;
+  padding:1in 0.7in; 
+  box-sizing:border-box;
+}
+
+/* force manual breaks where needed */
+/* .page-break{
+  page-break-before:always;
+} */
+
+/* optional: avoid breaking mid‑paragraph */
+/* .avoid-break{
+  display:inline-block; 
+  page-break-inside:avoid!important;
+} */
+
+.font-source-sans-pro {
+    font-family: 'Source Sans Pro', sans-serif;
+}
