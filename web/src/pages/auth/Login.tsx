@@ -69,7 +69,7 @@ const Login: React.FC = () => {
             console.log('credentialResponse', credentialResponse)
             const token = credentialResponse.credential;
             dispatch(GoogleBtnLogin(token as string));
-            window.location.href = '/app/dashboard';
+            window.location.href = '/app/resumes';
           }}
           onError={() => {
             console.log('Login Failed');

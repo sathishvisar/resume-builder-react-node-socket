@@ -11,14 +11,13 @@ function AppRoutes() {
 
 const App: React.FC = () => {
 
-   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   
-    // useEffect(() => { dispatch(UserInfo()); }, [dispatch]);
-    const status = useAppSelector((s) => s.auth.status); 
+  const status = useAppSelector((s) => s.auth.status); 
 
-    useEffect(() => {
-      if (status === 'idle') dispatch(UserInfo());
-    }, [dispatch, status]);
+  useEffect(() => {
+    if (status === 'idle') dispatch(UserInfo());
+  }, [dispatch, status]);
 
 
   return (

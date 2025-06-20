@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import React, { useState } from "react";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { GoogleBtnLogin } from "@/features/auth/authThunks";
 import { UserRegister } from "@/features/auth/authThunks";
@@ -103,7 +103,7 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
             console.log('credentialResponse', credentialResponse)
             const token = credentialResponse.credential;
             dispatch(GoogleBtnLogin(token as string));
-            window.location.href = '/app/dashboard';
+            window.location.href = '/app/resumes';
           }}
           onError={() => {
             console.log('Login Failed');
