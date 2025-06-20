@@ -9,6 +9,7 @@ import appRoutes from './routes';
 import { connectDB } from './config/mongoose';
 import initSocket from './sockets'
 import { auth } from './middleware/auth';
+
 dotenv.config();
 
 const app = express();

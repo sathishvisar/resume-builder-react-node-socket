@@ -22,10 +22,6 @@ export default async function initSocket(httpServer: AnyServer) {
         console.log("⚡  New client:", socket.id);
 
         socket.on("client:data", async (payload) => {
-            console.log({
-                _id: payload.resume_id,
-                user: payload.user_id
-            })
             const resume = await Resume.findOne({
                 _id: payload.resume_id,
                 user: payload.user_id
