@@ -1,5 +1,10 @@
 // src/icons/index.ts
 export { ReactComponent as Logo } from '@/assets/icons/logo.svg';
+
+export { ReactComponent as Menu } from '@/assets/icons/Menu.svg';
+export { ReactComponent as Dashboard } from '@/assets/icons/Dashboard.svg';
+export { ReactComponent as Resume } from '@/assets/icons/Resume.svg';
+
 export { ReactComponent as LogoIpsum } from '@/assets/icons/logoipsum.svg';
 export { ReactComponent as SignIn } from '@/assets/icons/login.svg';
 export { ReactComponent as User } from '@/assets/icons/user.svg';

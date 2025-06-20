@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { UserLogin, GoogleBtnLogin } from './authThunks';
+import { UserLogin, GoogleBtnLogin, UserRegister } from './authThunks';
 
 const TOKEN_KEY = 'access_token'
 
@@ -34,8 +34,6 @@ const authSlice = createSlice({
         .addCase(UserLogin.pending, (s) => { s.status = 'loading'; })
         .addCase(UserLogin.fulfilled, (s, a) => {
             s.status = 'succeeded'
-            // s.token = a.payload.token
-            // localStorage.setItem(TOKEN_KEY, a.payload.token)
         })
         .addCase(UserLogin.rejected, (s, a) => {
             s.status = 'failed'
@@ -45,12 +43,22 @@ const authSlice = createSlice({
         /*  ─── Google login ─── */
         .addCase(GoogleBtnLogin.pending,   (s) => { s.status = 'loading'; })
         .addCase(GoogleBtnLogin.fulfilled, (s, a) => {
-            s.status = 'succeeded';
+            s.status = 'succeeded'
         })
         .addCase(GoogleBtnLogin.rejected,  (s, a) => {
-            s.status = 'failed';
-            s.error  = a.error.message || 'Google login failed';
-        });
+            s.status = 'failed'
+            s.error  = a.error.message || 'Google login failed'
+        })
+
+        /*  ─── User Register ─── */
+        .addCase(UserRegister.pending, (s) => {s.status = 'loading'})
+        .addCase(UserRegister.fulfilled, (s, a) => {
+            s.status = 'succeeded'
+        })
+        .addCase(UserRegister.rejected,  (s, a) => {
+            s.status = 'failed'
+            s.error  = a.error.message || 'Google login failed'
+        })
     }
 })
 

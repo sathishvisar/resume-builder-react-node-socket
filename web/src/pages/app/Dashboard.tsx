@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 
 const Dashboard: React.FC = (props: PropsWithChildren) => {
     return <>
-        <h3>Login</h3>
+        <h3>Dashboard</h3>
     </>
 }
 

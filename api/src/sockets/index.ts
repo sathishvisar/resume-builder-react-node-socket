@@ -2,6 +2,7 @@ import { Http2Server } from "http2";
 import { Socket, Server } from "socket.io";
 import { Server as HttpServer }   from "http";
 import { BuildResume } from "../services/pdfService";
+import Resume from "../models/Resume";
 
 type AnyServer = HttpServer | Http2Server;
 /**
@@ -21,10 +22,22 @@ export default async function initSocket(httpServer: AnyServer) {
         console.log("⚡  New client:", socket.id);
 
         socket.on("client:data", async (payload) => {
-            console.log("🔹 received");
-            
-            const pdfBuffer = await BuildResume(payload)
-            socket.emit("server:data", pdfBuffer);
+            console.log({
+                _id: payload.resume_id,
+                user: payload.user_id
+            })
+            const resume = await Resume.findOne({
+                _id: payload.resume_id,
+                user: payload.user_id
+            })
+
+            if (resume) {
+                resume.data = payload.data;
+                await resume.save();
+
+                const pdfBuffer = await BuildResume(payload?.data)
+                socket.emit("server:data", pdfBuffer);   
+            }
         });
 
         socket.on("disconnect", () => console.log("👋  Client left"));

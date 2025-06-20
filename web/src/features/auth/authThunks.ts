@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authService, LoginRequest } from './auth.service';
+import { authService, LoginRequest, RegisterRequest } from './auth.service';
 
 export const UserLogin = createAsyncThunk(
     'auth/login', 
@@ -9,6 +9,13 @@ export const UserLogin = createAsyncThunk(
     }
 )
 
+export const UserRegister = createAsyncThunk(
+    'auth/register',
+    async (body: RegisterRequest) => {
+        const { user } = await authService.UserRegister(body)
+        return { user };
+    } 
+)
 
 export const GoogleBtnLogin = createAsyncThunk(
     'auth/google', 

@@ -10,9 +10,21 @@ export interface LoginResponse {
   user: any;
 }
 
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  confirm: string;
+}
+
 
 const UserLogin = async function (body: LoginRequest) {
     const { data } = await api.post<LoginResponse>('/auth/login', body)
+    return data
+}
+
+const UserRegister = async function (body: LoginRequest) {
+    const { data } = await api.post<LoginResponse>('/auth/register', body)
     return data
 }
 
@@ -23,4 +35,4 @@ const GoogleLogin = async function (token: string) {
     return data
 }
 
-export const authService = { UserLogin, GoogleLogin };
+export const authService = { UserLogin, UserRegister, GoogleLogin };
