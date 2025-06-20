@@ -17,9 +17,8 @@ export async function BuildResume (data: any) {
             <section class="grid grid-cols-12">
             <div class="col-span-9 pr-3">
                 <div class="profile mb-8">
-                <h3 class="resume-heading-2">Profile</h3>
-                <div class="resume-content">${data?.summary?.text}</div>
-                <div class="resume-content">${data?.summary?.text}</div>
+                    <h3 class="resume-heading-2">Profile</h3>
+                    <div class="resume-content">${data?.summary?.text}</div>
                 </div>
 
                 <div class="employement-history">
@@ -115,10 +114,10 @@ export async function BuildResume (data: any) {
                 <div class="flex flex-col">
                 <h6 class="text-normal resume-heading-3">Details</h6>
                 <div class="flex flex-col gap-1 resume-sidebar-content">
-                    <span>${data?.personal.cityState}</span>
-                    <span>${data?.personal.country}</span>
-                    <span>${data?.personal.phone}</span>
-                    <span>${data?.personal.email}</span>
+                    <span>${data?.personal?.cityState}</span>
+                    <span>${data?.personal?.country}</span>
+                    <span>${data?.personal?.phone}</span>
+                    <span>${data?.personal?.email}</span>
                 </div>
                 </div>
                 <div class="flex flex-col">

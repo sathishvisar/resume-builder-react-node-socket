@@ -2,9 +2,10 @@ import React, { useState, PropsWithChildren } from "react";
 
 interface ItemProps extends PropsWithChildren {
   title: string;
+  keepMounted?: boolean;
 }
 
-export const AccordionItem: React.FC<ItemProps> = ({ title, children }) => {
+export const AccordionItem: React.FC<ItemProps> = ({ title, children, keepMounted = false }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,7 +36,12 @@ export const AccordionItem: React.FC<ItemProps> = ({ title, children }) => {
         }`}
       >
         <div className="overflow-hidden">
-          <div className="pb-4 text-gray-600">{children}</div>
+          {/* <div className="pb-4 text-gray-600">{children}</div> */}
+           {keepMounted || open ? (
+            <div className={`pb-4 text-gray-600 ${!open && keepMounted ? "hidden" : ""}`}>
+              {children}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ module.exports = {
           100: '#F3F6FF',
         },
         primary: {
-          brand: '#6366F1',
+          brand: '#1e88ed', // #1e88ed #6366F1
         },
         text: {
           light: '#3E4265',

@@ -59,17 +59,20 @@ export const BodyText = ({ variant, children, className, as = 'p' }: BodyTextPro
 interface NavigationProps extends TypographyProps {
   href?: string;
   as?: 'a' | 'span';
+  onClick?: any;
+  target?: React.HTMLAttributeAnchorTarget;
+  rel?: string;
 }
 
-export const Navigation = ({ children, className, href, as }: NavigationProps) => {
+export const Navigation = ({ children, className, href, as, ...rest }: NavigationProps) => {
   const baseClass = clsx(
-    'text-navigation',
+    'text-navigation cursor-pointer',
     className
   );
 
   const Component = href ? 'a' : as || 'span';
   return (
-    <Component  {...(href ? { href } : {})} className={baseClass}>
+    <Component  {...(href ? { href } : {})} className={baseClass} {...rest}>
       {children}
     </Component>
   );

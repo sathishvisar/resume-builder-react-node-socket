@@ -1,9 +1,17 @@
-import React, { PropsWithChildren } from "react"
-import { Outlet } from "react-router-dom"
+import { useAppSelector } from "@/store/hooks";
+import React from "react"
+import { Navigate, Outlet, useLocation } from "react-router-dom"
 
 
 
-const AuthLayout: React.FC = (props: PropsWithChildren) => {
+const AuthLayout: React.FC = () => {
+    const location = useLocation();
+
+    const { userInfo } = useAppSelector((state) => state.user);
+    if (userInfo) {
+        return <Navigate to="/app/dashboard" state={{ from: location }} replace />;
+    }
+    
     return <div>
         <Outlet />
     </div>

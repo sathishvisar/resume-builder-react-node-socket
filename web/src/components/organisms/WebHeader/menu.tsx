@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigation } from './../../atoms/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const manu = [
   { link: '/', name: 'Home' },
-  { link: '/pricing', name: 'Pricing' },
-  { link: '/docs', name: 'Docs' },
+  { link: '/about-us', name: 'About us' },
   { link: '/contact', name: 'Contact' },
 ];
 
@@ -14,12 +14,14 @@ interface Props {
 }
 
 const Menu: React.FC<Props> = ({classname, direction}) => {
+  const navigate = useNavigate();
+
   return (
     <nav className={classname}>
-      <ul className={`flex ${direction === 'col' ? 'flex-col space-y-4' : 'flex-row space-x-4'}`}>
+      <ul className={`flex ${direction === 'col' ? 'flex-col space-y-4' : 'flex-row gap-x-16'}`}>
         {manu.map((item, index) => (
           <li key={index}>
-            <Navigation href={item.link} className='text-gray-800'>{item.name}</Navigation>
+            <Navigation onClick={() => navigate(item.link, {replace: true})} className='text-gray-800'>{item.name}</Navigation>
           </li>
         ))}
       </ul>

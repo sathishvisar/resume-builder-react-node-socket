@@ -11,7 +11,7 @@ export interface CardInfo {
 const InfoCard: React.FC<CardInfo> = ({ title, description, icon }) => {
   return (
     <div className="w-full">
-      <Icon name={icon} className="mb-6 m-auto" />
+      <Icon name={icon} className="mb-6 m-auto text-[#1e88ed]" />
       <Heading variant="h5" className="text-center mb-3">
         {title}
       </Heading>

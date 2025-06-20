@@ -71,17 +71,15 @@ export const googleAuth = async (req: Request, res: Response) => {
   }
 };
 
-export const registerUser = async (email: string, password: string) => {
-  const existing = await User.findOne({ email });
+export const registerUser = async (mail: string, password: string) => {
+  const existing = await User.findOne({ email: mail });
   if (existing) throw new Error("Email already exists");
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({
-    email,
+  const { email, firstname, lastname, picture } = await User.create({
+    email: mail,
     password: hashedPassword,
   });
-  return {
-    user: newUser,
-  };
+  return { email, firstname, lastname, picture };
 };
 
 export const loginUser = async (req: Request, res: Response) => {

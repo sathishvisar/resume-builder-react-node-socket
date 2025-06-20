@@ -10,12 +10,12 @@ interface Props {
   initialScale?: number;
 }
 
-const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 2 }) => {
+const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 1 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [numPages, setNumPages]     = useState(0);
-  const [scale] = useState(initialScale);
+  const [scale, setScale] = useState(initialScale);
 
   /* ───────── render current page ───────── */
   useEffect(() => {
@@ -32,7 +32,7 @@ const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 2 }) => {
       const safePage = Math.min(pageNumber, pdf.numPages);
 
       const page = await pdf.getPage(safePage);
-      const viewport = page.getViewport({ scale });
+      const viewport = page.getViewport({ scale: scale + 2 });
 
       const canvas  = canvasRef.current!;
       const context = canvas.getContext("2d")!;
@@ -52,8 +52,8 @@ const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 2 }) => {
   );
 
   /* ───────── optional zoom controls ─────── */
-//   const zoomIn  = () => setScale((s) => s + 1);
-//   const zoomOut = () => setScale((s) => Math.max(0.4, s - 1));
+  const zoomIn  = () => setScale((s) => s + 1);
+  const zoomOut = () => setScale((s) => Math.max(0.4, s - 1));
 
 
   const downloadBlob = (blob: Blob, filename: string) => {
@@ -71,7 +71,6 @@ const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 2 }) => {
   return (
     <div className="inline-block border shadow p-4 w-full">
       {!blob && <p className="text-gray-500">Waiting for PDF…</p>}
-
       <canvas ref={canvasRef} className="mb-4 w-full" />
 
       {blob && (
@@ -95,9 +94,9 @@ const PdfCanvasViewer: React.FC<Props> = ({ blob, initialScale = 2 }) => {
           >
             Next ▶
           </button>
-{/* 
+
           <button onClick={zoomOut} className="ml-6 px-2">－</button>
-          <button onClick={zoomIn}  className="px-2">＋</button> */}
+          <button onClick={zoomIn}  className="px-2">＋</button>
           <button
       onClick={() => downloadBlob(blob, "document.pdf")}
       className="ml-auto px-3 py-1 bg-indigo-600 text-white rounded"

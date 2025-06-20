@@ -26,7 +26,7 @@ export const auth: RequestHandler = async (req, res, next) => {
     res.sendStatus(401);
     return;
   }
-
-  req.user = session.user as any;
+  const { _id, email, firstname, lastname, picture} = session.user as any;
+  req.user = { _id, email, firstname, lastname, picture}
   next();
 };

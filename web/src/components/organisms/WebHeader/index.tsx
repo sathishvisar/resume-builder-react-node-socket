@@ -5,30 +5,33 @@ import { Button } from '../../atoms/Button';
 import { Icon } from './../../Icon';
 import { Heading } from '@/components/atoms/Typography';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { useNavigate } from 'react-router-dom';
 
 const WebHeader: React.FC = () => {
   const [mobileMenu, toggleMobileMenu] = useState(false);
+
+  const navigate = useNavigate();
 
   const bp = useBreakpoint();
 
   const isDesktop = bp === 'xl' || bp === '2xl';
 
-useEffect(() => {
-  if (isDesktop && mobileMenu) {
-    toggleMobileMenu(false);
-  }
-}, [isDesktop, mobileMenu]);
+  useEffect(() => {
+    if (isDesktop && mobileMenu) {
+      toggleMobileMenu(false);
+    }
+  }, [isDesktop, mobileMenu]);
 
   return (
     <header className={clsx('container mx-auto py-4 flex justify-between')}>
         <div className={clsx('flex items-center gap-x-12')}>
-          <Icon name="Logo" className="w-[44] h-auto" />
+          <Icon name="Logo" className="w-[44] h-auto cursor-pointer" onClick={() => navigate('/', {replace: true})}/>
           <Menu classname='hidden xl:flex' />
         </div>
         <div className={clsx('flex items-center gap-x-4 md:gap-x-8')}>
           <div className={clsx('flex gap-x-4 hidden xl:flex')}>
-            <Button size="small" shape="rounded" color="secondary" className='gap-1'><Icon name='SignIn'/> Sign in</Button>  
-            <Button size="small" shape="rounded" color="blue" className='gap-1'><Icon name='User' /> Sign up</Button>  
+            <Button size="small" shape="rounded" color="secondary" className='gap-1' onClick={() => navigate('/auth/login', {replace: true})}><Icon name='SignIn'/> Sign in</Button>  
+            <Button size="small" shape="rounded" color="blue" className='gap-1' onClick={() => navigate('/auth/register', {replace: true})}><Icon name='User' /> Sign up</Button>  
           </div>
           <Button color='transparent' className='xl:!hidden' onClick={()=>{toggleMobileMenu(!mobileMenu)}}>
             <span className="

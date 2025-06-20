@@ -3,7 +3,13 @@ import Resume, { IResume } from "../models/Resume";
 import { BuildResume } from './pdfService'
 
 export const list = async (req: Request, res: Response) => {
-    const resumes = await Resume.find({user: req.user._id})
+    const resumes = await Resume
+        .find({user: req.user._id})
+        // .populate({
+        //     path: 'user',
+        //     select: 'firstname lastname picture',
+        // })
+        // .lean(); 
     return resumes
 }
 
@@ -12,6 +18,14 @@ export const create = async (req: Request, res: Response) => {
         user: req.user._id
     });
     return newResume
+}
+
+
+export const read = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const resume = await Resume.findById({_id: id})
+    if (!resume) throw new Error("Invalid Resume ID");
+    return resume
 }
 
 export const update = async (req: Request, res: Response) => {
