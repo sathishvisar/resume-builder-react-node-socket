@@ -16,7 +16,6 @@ const Login = lazy(() => import('./pages/auth/Login'));
 const Register = lazy(() => import('./pages/auth/Register'));
 
 // dashboard pages
-const Dashboard = lazy(() => import('./pages/app/Dashboard'));
 const Resumes = lazy(() => import('./pages/app/Resumes'));
 const Resume = lazy(() => import('./pages/app/Resume'));
 
@@ -45,8 +44,7 @@ export const getRoutes = () => [
     path: "/app",
     element: <AppLayout />,
     children: [
-      { index: true, element: <Navigate to="dashboard" replace />},
-      { path: 'dashboard', element: <Dashboard /> },
+      { index: true, element: <Navigate to="resumes" replace />},
       { path: 'resumes', element: <Resumes /> },
       {path: "resume/templates", element: <Resume />},
       {path: "resume/list", element: <Resume />},

@@ -38,7 +38,6 @@ const DashboardLayout = () => {
     link: string;
   }
   const menuItems: MenuItem[] = [
-    { label: "Dashboard", icon: "Dashboard", link: '/app/dashboard' },
     { label: "Resumes", icon: "Resume", link: '/app/resumes'}
   ];
 

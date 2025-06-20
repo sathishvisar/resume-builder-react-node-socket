@@ -9,7 +9,7 @@ const AuthLayout: React.FC = () => {
 
     const { userInfo } = useAppSelector((state) => state.user);
     if (userInfo) {
-        return <Navigate to="/app/dashboard" state={{ from: location }} replace />;
+        return <Navigate to="/app/resumes" state={{ from: location }} replace />;
     }
     
     return <div>

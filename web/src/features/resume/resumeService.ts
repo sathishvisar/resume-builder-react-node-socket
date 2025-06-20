@@ -6,7 +6,7 @@ const List = async function () {
 }
 
 const Create = async function () {
-    const { data } = await api.get<any>('/resume/create')
+    const { data } = await api.post<any>('/resume/create')
     return data
 }
 
