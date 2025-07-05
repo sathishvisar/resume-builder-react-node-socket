@@ -27,7 +27,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
     <div className="mb-4">
       <label
         htmlFor={uid}
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       >
         {label}
       </label>

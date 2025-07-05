@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import { OAuth2Client } from "google-auth-library";
-import { generateApiKey } from "./../utils/common";
 import { randomUUID } from "crypto";
 import Session from "../models/Session";
 import User, { IUser } from "../models/User";
@@ -30,12 +29,10 @@ export const googleAuth = async (req: Request, res: Response) => {
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
-
     const payload = ticket.getPayload();
 
     // Check or create user in MongoDB
     let user = await User.findOne({ email: payload?.email });
-    console.log(user);
     if (!user) {
       user = await User.create({
         googleId: payload?.sub,

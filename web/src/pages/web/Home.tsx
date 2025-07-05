@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from "react"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
 import { useAppDispatch } from '@/store/hooks';
 
 const HomeInfoCards = React.lazy(() => import('@/components/organisms/HomeInfoCards'));
@@ -25,6 +24,7 @@ const HomePage: React.FC = () => {
 
     return <>
         <Suspense fallback={<div>Loading...</div>}>
+
             <div data-aos="fade-up"><HeroSection /></div>
             <div data-aos="fade-up" data-aos-delay="100"><HomeInfoCards /></div>
             <div data-aos="fade-up" data-aos-delay="200"><Testimonial /></div>

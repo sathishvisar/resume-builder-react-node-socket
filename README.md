@@ -13,6 +13,7 @@ This project was built as a personal practice project using modern frontend and 
 - 🧠 Global state management with Redux
 - 📝 Editable sections: Personal Info, Work Experience, Education, Skills, Projects, etc.
 - 📄 Live preview of the resume as you type
+- 🖼️ Generate resume thumbnail & upload to AWS S3
 - 📥 Download resume as PDF
 - 🔐 (Optional) Authentication for saving and managing resumes
 - 🔐 Authentication:
@@ -39,5 +40,6 @@ This project was built as a personal practice project using modern frontend and 
 
 ### 📸 Preview
 
-![Resume Builder Screenshot](./resume_editor.png)
+![Resume Builder Screenshot](./resume_editor_1.png)
+![Resume List](./resume_editor_2.png)
 ![Landing Page Screenshot](./landing.png)

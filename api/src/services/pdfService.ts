@@ -1,4 +1,5 @@
-import { chromium } from "playwright";          // ES‑module import
+import { chromium } from "playwright";
+import { fromBuffer } from 'pdf2pic';
 
 
 export async function BuildResume (data: any) {
@@ -124,7 +125,7 @@ export async function BuildResume (data: any) {
                 <h6 class="font-normal resume-heading-3">Links</h6>
                 <div class="flex flex-col gap-1 resume-sidebar-content">
                      ${(Array.isArray(data?.links) ? data.links : [])
-                        .map((link: string) => `<span>${link}</span>`)
+                        .map((item: any) => `<span>${item?.link}</span>`)
                         .join("")
                     }
                 </div>
@@ -133,7 +134,7 @@ export async function BuildResume (data: any) {
                 <h6 class="text-normal resume-heading-3">Skills</h6>
                 <div class="flex flex-col gap-1 resume-sidebar-content">
                     ${(Array.isArray(data?.skills) ? data.skills : [])
-                        .map((skill: string) => `<span>${skill}</span>`)
+                        .map((item: any) => `<span>${item?.skill}</span>`)
                         .join("")
                     }
                 </div>
@@ -159,15 +160,33 @@ async function BuildPdf(template: any) {
       <html><head>
         <meta charset="UTF-8">
         <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
       </head>
       <body class="p-10">
         ${template}
       </body>
       <style>
-      @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+     ul {
+  list-style-type: disc;
+  padding-left: 1.5rem; /* equivalent to pl-6 */
+  margin-bottom: 0.5rem;
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+  color: #1e2532; /* your desired text color */
+}
+
       .font-source-sans-pro {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: "Source Sans 3", sans-serif;
       }
+
     .resume-heading-2 {
         font-weight: 600;
         font-size: 18px;
@@ -191,10 +210,34 @@ async function BuildPdf(template: any) {
         font-size: 13.33px;
     }
       </style>
-      </html>
-    `;
+      </html>`;
+    console.log(html)
     await page.setContent(html, { waitUntil: "networkidle" });
     const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
     await browser.close();
     return pdfBuffer
 }
+
+
+export async function generatePreviewFromBuffer(pdfBuffer: Buffer) {
+    try{
+        const convert = fromBuffer(pdfBuffer, {
+            density: 150,
+            format: 'png',
+            width: 800,
+            height: 1100,
+            saveFilename: 'preview',
+            savePath: './',
+        });
+
+        const page1 = await convert(1);
+        return page1.path
+    }catch(e){
+        console.log(e)
+        return ""
+    }
+}
+
+/**
+ *       @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+ */

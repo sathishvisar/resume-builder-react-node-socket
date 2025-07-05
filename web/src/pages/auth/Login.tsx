@@ -18,7 +18,6 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(UserLogin({ email, password }))
-    console.log({ email, password });
   };
 
   return (
@@ -69,7 +68,7 @@ const Login: React.FC = () => {
             console.log('credentialResponse', credentialResponse)
             const token = credentialResponse.credential;
             dispatch(GoogleBtnLogin(token as string));
-            window.location.href = '/app/resumes';
+            // window.location.href = '/app/resumes';
           }}
           onError={() => {
             console.log('Login Failed');

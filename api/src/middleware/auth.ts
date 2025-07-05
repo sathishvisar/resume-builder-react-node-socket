@@ -3,6 +3,7 @@ import { RequestHandler } from 'express';
 import Session from './../models/Session';
 
 const PUBLIC_PATHS = new Set([
+  '/api/test/ping',
   '/api/auth/google',
   '/api/auth/login',
   '/api/auth/register'
@@ -15,6 +16,7 @@ export const auth: RequestHandler = async (req, res, next) => {
   }
 
   const sid = req.cookies?.sid;
+  console.log('sid', sid)
   if (!sid) {
     res.sendStatus(401);
     return;

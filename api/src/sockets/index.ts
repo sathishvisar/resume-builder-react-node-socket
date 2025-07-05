@@ -1,7 +1,8 @@
 import { Http2Server } from "http2";
 import { Socket, Server } from "socket.io";
 import { Server as HttpServer }   from "http";
-import { BuildResume } from "../services/pdfService";
+import { BuildResume, generatePreviewFromBuffer } from "../services/pdfService";
+import { uploadImageFromFile } from "../services/awsS3Service";
 import Resume from "../models/Resume";
 
 type AnyServer = HttpServer | Http2Server;
@@ -29,9 +30,13 @@ export default async function initSocket(httpServer: AnyServer) {
 
             if (resume) {
                 resume.data = payload.data;
-                await resume.save();
-
                 const pdfBuffer = await BuildResume(payload?.data)
+                const previewPath = await generatePreviewFromBuffer(pdfBuffer)
+                if(previewPath){
+                    const uploadedUrl = await uploadImageFromFile(previewPath, `resume/${payload.resume_id}`);
+                    resume.thumbnail = uploadedUrl
+                }
+                await resume.save();
                 socket.emit("server:data", pdfBuffer);   
             }
         });

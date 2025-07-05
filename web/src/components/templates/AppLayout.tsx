@@ -64,7 +64,7 @@ const DashboardLayout = () => {
           {/* Logo/Brand */}
           <div className="flex h-16 items-center justify-center border-b border-gray-200">
             {isCollapsed ? (
-              <div className="text-xl font-bold text-gray-800">RN</div>
+              <div className="text-xl font-bold text-gray-800">FR</div>
             ) : (
               <h1 className="text-xl font-bold text-[#1e88ed]"><Icon name="Logo" /></h1>
             )}

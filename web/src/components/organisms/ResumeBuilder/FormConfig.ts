@@ -69,7 +69,7 @@ export const formConfig: FormSectionConfig[] = [
             sectionName: 'links',
             isArray: true,
             fields: [
-                { name: '', label: 'Link URL', type: 'text', required: true }
+                { name: 'links.link', label: 'Link URL', type: 'text', required: true }
             ]
         },
         {
@@ -77,7 +77,7 @@ export const formConfig: FormSectionConfig[] = [
             sectionName: 'skills',
             isArray: true,
             fields: [
-                { name: '', label: 'Skill', type: 'text', required: true }
+                { name: 'skills.skill', label: 'Skill', type: 'text', required: true }
             ]
         },
         {

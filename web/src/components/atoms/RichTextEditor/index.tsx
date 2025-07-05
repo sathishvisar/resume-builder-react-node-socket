@@ -21,6 +21,7 @@ import {
 import 'draft-js/dist/Draft.css';
 import '@draft-js-plugins/static-toolbar/lib/plugin.css';
 import '@draft-js-plugins/anchor/lib/plugin.css';
+import ListButton from './UnorderedListButton';
 
 type Props = {
   /** External HTML value ('' for empty) */
@@ -96,8 +97,20 @@ const RichTextEditor: React.FC<Props> = ({
             <BoldButton {...externalProps} />
             <ItalicButton {...externalProps} />
             <UnderlineButton {...externalProps} />
-            <OrderedListButton {...externalProps} />
-            <UnorderedListButton {...externalProps} />
+            {/* <OrderedListButton {...externalProps} />
+            <UnorderedListButton {...externalProps} /> */}
+            <ListButton
+              editorState={editorState}
+              onChange={handleInternalChange}
+              type="ordered-list-item"
+              label="OL"
+            />
+            <ListButton
+              editorState={editorState}
+              onChange={handleInternalChange}
+              type="unordered-list-item"
+              label="UL"
+            />
             <LinkButton {...externalProps} />
           </>
         )}
@@ -105,7 +118,7 @@ const RichTextEditor: React.FC<Props> = ({
 
       {/* editor */}
       <div
-        className="min-h-[150px] cursor-text rounded border p-3"
+        className="block w-full bg-[#eff2f9] font-normal text-[#1e2532] p-4"
         onClick={() => editorRef.current?.focus()}
       >
         <Editor

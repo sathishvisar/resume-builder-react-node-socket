@@ -1,10 +1,10 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { ListResume, CreateResume } from '@/features/resume/resumeThunks'
-import UpdatedTime from "@/components/UpdatedTime"
-import { BodyText, Heading, Navigation } from "@/components/atoms/Typography"
+import { Heading } from "@/components/atoms/Typography"
 import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/atoms/Button"
+import ResumeCard from "@/components/molecules/ResumeCard"
 
 
 const Resumes: React.FC = () => {
@@ -12,7 +12,7 @@ const Resumes: React.FC = () => {
     const navigate = useNavigate()
 
     const list = useAppSelector((state) => state.resume.List);
-     const new_resume = useAppSelector((state) => state.resume.new_resume_data);
+    const new_resume = useAppSelector((state) => state.resume.new_resume_data);
 
     useEffect(() => {
         dispatch(ListResume())
@@ -30,22 +30,13 @@ const Resumes: React.FC = () => {
     return <div className="flex flex-col gap-y-4">
         <div className="flex items-center justify-between">
             <Heading variant="h3">Resumes</Heading>
-            <Button onClick={()=>{createResume()}}>New Resume</Button>
+            <Button size="small" onClick={()=>{createResume()}}>+ Create New</Button>
         </div>
-        <div className="flex gap-4">
+        <div className="grid grid-cols-12 gap-4">
         {
             list.map((item) => {
-                return <div key={item._id} className="flex flex-col  border border-gray-300 p-4">
-                    <Heading variant="h5" className="mb-2">{item?.name || 'Untitled'}</Heading>
-                    <BodyText variant="body-xs" className="mb-4"><UpdatedTime date={item.updatedAt} /> </BodyText>
-                    <Navigation className="body-s mb-2" onClick={()=>{navigate(`/app/resume/edit/${item._id}`)}}>Edit PDF</Navigation>
-                    <Navigation className="body-s"
-                    href={`${process.env.REACT_APP_API_URL}/api/resume/download/${item._id}`}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    >Download PDF</Navigation>
-                </div>
-            })
+                return<><ResumeCard item={item} />
+            </>})
         }
         </div>
     </div>

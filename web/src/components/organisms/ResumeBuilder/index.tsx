@@ -63,19 +63,18 @@ const ResumeBuilder: React.FC<Props> = ({onClick, resume_data}) => {
     return <>
     <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            { formConfig.map((section) => {
+            { formConfig.map((section, i) => {
                 const sectionData:any = watchedValues[section.sectionName];
-                return<>
-                <AccordionItem keepMounted title={section.title}>
+                return<><AccordionItem keepMounted title={section.title} key={i}>
                     <div key={section.sectionName} className="py-4">
                         
                         {section.isArray && Array.isArray(sectionData) ? (
                             sectionData.map((_, index: number) => (
                                 <div className="py-2">
-                                    <AccordionItem title={`${sectionData[0]['title']}`}>
+                                    {/* <AccordionItem title={`${sectionData[0]['title']}`}> */}
                                         <div key={`${section.sectionName}.${index}`} className="mb-6 p-4 border rounded-lg relative">
                                             <div className={`grid grid-cols-2 gap-4`}>
-                                                {section.fields.map((field) => (
+                                                {section.fields.map((field) => (<>
                                                     <DynamicField
                                                         className={`${field.type === 'rich-text' ? 'col-span-full' : ''}`}
                                                         key={`${section.sectionName}.${index}.${field.name}`}
@@ -84,7 +83,7 @@ const ResumeBuilder: React.FC<Props> = ({onClick, resume_data}) => {
                                                             name: `${section.sectionName}.${index}.${field.name.split('.').pop()}` as any
                                                         }}
                                                     />
-                                                ))}
+                                                </>))}
                                             </div>
                                             <button
                                             type="button"
@@ -94,7 +93,7 @@ const ResumeBuilder: React.FC<Props> = ({onClick, resume_data}) => {
                                             Remove
                                             </button>
                                         </div>
-                                    </AccordionItem>
+                                    {/* </AccordionItem> */}
                                 </div>
                             ))
                         ) : (
